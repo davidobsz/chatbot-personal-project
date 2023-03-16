@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+	<title>Chat Bot v0.1</title>
+
+</head>
+<body>
+<div id="introduction">
+    <h3>ChatBot v0.1</h3>
+</div>
+<div id="all-container">
+	<div class="container">
+		<div class="chatbox">
+            {% if chat_log is not none %}
+            {% for chat in chat_log %}
+		{% for message in chat %}
+			{% if message['role'] == 'user' %}
+				<p><strong>You:</strong> {{ message['content'] }}</p>
+            {% endif %}
+			{% if message['role'] == 'assistant' %}
+				<p><strong>Bot:</strong> {{ message['content'] }}</p>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+        {% else %}
+        <p>No chat log yet available.</p>
+        {% endif %}
+        </div>
+
+        <form method="post">
+            <div class="input-container" id="inputs-container">
+			<input type="text" name="input" placeholder="Type your message here...">
+			<button>Send</button>
+		</div>
+        </form>
+
+	</div>
+</div>
+</body>
+</html>
